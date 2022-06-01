@@ -59,12 +59,9 @@ async def select_service(msg: Message, dialog_manager: DialogManager):
     await dialog_manager.start(UserDialog.start)
 
 
-@dp.message_handler(commands=['help'])
+@dp.message_handler(commands=['help'], state=None)
 async def show_help(msg: Message):
     h = Path(__file__).with_name('help.txt')
     with h.open('r', encoding='utf-8') as response:
         await msg.answer(response.read(), reply_markup=ReplyKeyboardRemove())
         response.close()
-
-
-

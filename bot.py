@@ -16,8 +16,8 @@ async def on_shutdown(dispatcher):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    executor.start_polling(dispatcher=dp)
-"""    start_webhook(dispatcher=dp, webhook_path=webhook_path,
+#    executor.start_polling(dispatcher=dp)
+    start_webhook(dispatcher=dp, webhook_path=webhook_path,
                   skip_updates=True, on_startup=on_startup,
                   on_shutdown=on_shutdown, host=webapp_host,
-                  port=webapp_port)"""
+                  port=webapp_port)
