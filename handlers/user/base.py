@@ -35,6 +35,11 @@ async def cancel_record(msg: Message, state: FSMContext):
     await state.reset_state(with_data=True)
 
 
+@dp.message_handler(state=RegisterUser.send_contact)
+async def require_push(msg: Message, state: FSMContext):
+    await msg.answer("Пожалуйста, нажми на одну из кнопок. Я не смогу продолжать диалог дальше, пока они тут 😓")
+
+
 @dp.message_handler(commands=["start"], state=None)
 async def start(msg: Message):
     await msg.answer("""👋Привет! Я - бот для записи в салон красоты "A-Studio". Воспользуйся командами ниже, чтобы узнать, что я умею.
@@ -55,7 +60,7 @@ async def show_help(msg: Message):
         response.close()
 
 
-@dp.message_handler(Text(equals=["привет", "здравствуйте", "👋", "🙋‍♂️", "🙋‍♀️"], ignore_case=True), state=None)
+@dp.message_handler(Text(equals=["привет!", "привет", "здравствуйте", "добрый день", "👋", "🙋‍♂️", "🙋‍♀️"], ignore_case=True), state=None)
 async def hello(msg: Message):
     await msg.answer("""👋Привет! Я - бот для записи в салон красоты "A-Studio". Воспользуйся командами ниже, чтобы узнать, что я умею.
 /service - записаться на услугу или к определённому мастеру
