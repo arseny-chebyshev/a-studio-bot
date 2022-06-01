@@ -7,5 +7,5 @@ admin_menu = ReplyKeyboardMarkup(keyboard=[
 
 request_phone_button_kbd = ReplyKeyboardMarkup(keyboard=[
     [KeyboardButton(text="🖊 Записаться", request_contact=True), KeyboardButton(text="❌ Отмена")],
-], resize_keyboard=True, one_time_keyboard=True)
+], resize_keyboard=True)
 
