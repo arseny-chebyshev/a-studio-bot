@@ -10,13 +10,6 @@ from states.user import UserDialog, RegisterUser
 from loader import dp
 
 
-@dp.message_handler(commands=["start"], state=None)
-async def start(msg: Message):
-    await msg.answer("""👋Привет! Я - бот для записи в салон красоты "A-Studio". Воспользуйся командами ниже, чтобы узнать, что я умею.
-/service - записаться на услугу или к определённому мастеру
-/help - узнать ответы на часто задаваемые вопросы""")
-
-
 @dp.message_handler(state=RegisterUser.send_contact, content_types=aiogram.types.ContentType.CONTACT)
 async def process_contact(msg: Message, state: FSMContext):
     data = await state.get_data()
@@ -42,16 +35,11 @@ async def cancel_record(msg: Message, state: FSMContext):
     await state.reset_state(with_data=True)
 
 
-@dp.message_handler(Text(equals=["привет", "здравствуйте", "👋", "🙋‍♂️", "🙋‍♀️"], ignore_case=True), state=None)
-async def hello(msg: Message):
+@dp.message_handler(commands=["start"], state=None)
+async def start(msg: Message):
     await msg.answer("""👋Привет! Я - бот для записи в салон красоты "A-Studio". Воспользуйся командами ниже, чтобы узнать, что я умею.
 /service - записаться на услугу или к определённому мастеру
 /help - узнать ответы на часто задаваемые вопросы""")
-
-
-@dp.message_handler(regexp=re.compile('(.*записаться.*|.*ногти.*|.*маникюр.*|.*сколько.*)', re.IGNORECASE), state=None)
-async def info_service(msg: Message):
-    await msg.answer("Чтобы записаться к нам, а также узнать информацию о ценах, окошках и свободных мастерах, используй команду /service.")
 
 
 @dp.message_handler(commands=['service'], state=None)
@@ -65,3 +53,20 @@ async def show_help(msg: Message):
     with h.open('r', encoding='utf-8') as response:
         await msg.answer(response.read(), reply_markup=ReplyKeyboardRemove())
         response.close()
+
+
+@dp.message_handler(Text(equals=["привет", "здравствуйте", "👋", "🙋‍♂️", "🙋‍♀️"], ignore_case=True), state=None)
+async def hello(msg: Message):
+    await msg.answer("""👋Привет! Я - бот для записи в салон красоты "A-Studio". Воспользуйся командами ниже, чтобы узнать, что я умею.
+/service - записаться на услугу или к определённому мастеру
+/help - узнать ответы на часто задаваемые вопросы""")
+
+
+@dp.message_handler(regexp=re.compile('как.*дела.*', re.IGNORECASE), state=None)
+async def answer_how_are_you(msg: Message):
+    await msg.answer("Да ничего, понемногу развиваюсь. Скоро мне добавят крутых функций, и я буду самым крутым помощником на свете! Спасибо, что интересуешься!")
+
+
+@dp.message_handler(regexp=re.compile('(.*записаться.*|.*ногти.*|.*маникюр.*|.*сколько.*)', re.IGNORECASE), state=None)
+async def info_service(msg: Message):
+    await msg.answer("Чтобы записаться к нам, а также узнать информацию о ценах, окошках и свободных мастерах, используй команду /service.")
