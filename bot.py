@@ -11,7 +11,8 @@ async def on_startup(dispatcher):
 
 
 async def on_shutdown(dispatcher):
-    await bot.delete_webhook()
+    pass
+#    await bot.delete_webhook() use it only if you are not using free 30min-and-idle dyno!
 
 
 def main():
