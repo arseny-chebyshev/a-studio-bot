@@ -57,7 +57,7 @@ async def apply_order(c: CallbackQuery, b: Button, d: DialogManager):
     await d.data['state'].update_data({"item": item, "master": master,
                                        "date_obj": date_obj, "datetime": datetime_id})
     await c.message.delete()
-    await c.message.answer(f"""Отлично! Вот детали заказа:
+    await c.message.answer(f"""Отлично! Вот детали записи:
 <strong>Услуга:</strong> {item.name}
 <strong>Стоимость:</strong> {master.price}
 <strong>Время:</strong> {date_obj.day} {date_obj.month_dict[date_obj.month]} ({date_obj.week_dict[date_obj.weekday()]}) {str(datetime_id[11:16])}
