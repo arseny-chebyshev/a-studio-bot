@@ -14,7 +14,7 @@ async def on_shutdown(dispatcher):
     await bot.delete_webhook()
 
 
-async def main():
+def main():
     logging.basicConfig(level=logging.DEBUG)
 #    executor.start_polling(dispatcher=dp)
     start_webhook(dispatcher=dp, webhook_path=webhook_path,
