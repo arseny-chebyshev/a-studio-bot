@@ -119,7 +119,7 @@ async def add_item(c: CallbackQuery, r: ManagedRadioAdapter, d: DialogManager, b
 
 service_group_keyboard = Window(Const("Выбери категорию услуг:"),
                                 Group(Radio(Format("✅ {item[0]}"),
-                                      Format("🔳 {item[0]}"),
+                                      Format("🔘 {item[0]}"),
                                       id="r_service_group", items='service_groups',
                                       item_id_getter=operator.itemgetter(1)),
                                 width=2),
@@ -133,7 +133,7 @@ service_group_keyboard = Window(Const("Выбери категорию услу�
 
 service_keyboard = Window(Const("Выбери услугу:"),
                           Group(Radio(Format("✅ {item[0].name}"),
-                                      Format("🔳 {item[0].name}"),
+                                      Format("🔘 {item[0].name}"),
                                       id="r_service", items='services',
                                       item_id_getter=operator.itemgetter(1)),
                                 width=1),
@@ -174,7 +174,7 @@ date_keyboard = Window(Const("Выбери дату:"),
 
 master_keyboard = Window(Const("Выбери мастера:"),
                          Group(Radio(Format("✅ {item[0]}"),
-                                     Format("🔳 {item[0]}"),
+                                     Format("🔘 {item[0]}"),
                                      id="r_master", items='masters',
                                      item_id_getter=operator.itemgetter(1)),
                                width=1),

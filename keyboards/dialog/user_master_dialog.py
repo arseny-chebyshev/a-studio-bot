@@ -124,7 +124,7 @@ m_master_keyboard = Window(Const("Выбери мастера:"),
 
 m_service_group_keyboard = Window(Const("Выбери категорию услуг:"),
                                   Group(Radio(Format("✅ {item[0]}"),
-                                      Format("🔳 {item[0]}"),
+                                      Format("🔘 {item[0]}"),
                                       id="r_service_group", items='service_groups',
                                       item_id_getter=operator.itemgetter(1)),
                                       width=2),
@@ -137,7 +137,7 @@ m_service_group_keyboard = Window(Const("Выбери категорию усл�
 
 m_service_keyboard = Window(Const("Выбери услугу:"),
                             Group(Radio(Format("✅ {item[0].name}"),
-                                        Format("🔳 {item[0].name}"),
+                                        Format("🔘 {item[0].name}"),
                                         id="r_service", items='services',
                                         item_id_getter=operator.itemgetter(1)),
                                   width=1),
