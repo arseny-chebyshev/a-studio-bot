@@ -8,7 +8,7 @@ import handlers.admin
 
 async def on_startup(dispatcher):
     await bot.set_webhook(webhook_url, drop_pending_updates=True)
-#    await bot.send_message(admin_id, "Starting..")
+    await bot.send_message(admin_id, "Starting..")
 
 async def on_shutdown(dispatcher):
     pass
