@@ -11,10 +11,10 @@ from models.serializers import Service, Date, Master
 from states.user import UserDialog
 from keyboards.dialog.base_dialog_buttons import cancel_button, continue_button, back_to_start_button, default_nav
 from .actions import switch_date, apply_order
-
+from settings import dikidi_org
 
 async def get_service_group(**kwargs):
-    params = {"lang": "RU", "company": 17280}
+    params = {"lang": "RU", "company": dikidi_org}
     json = session.get("https://dikidi.app/mobile/ajax/newrecord/company_services",
                         params=params).json()
     services_raw = json['data']['list']
@@ -24,7 +24,7 @@ async def get_service_group(**kwargs):
 
 
 async def get_service(**kwargs):
-    params = {"lang": "RU", "company": 17280}
+    params = {"lang": "RU", "company": dikidi_org}
     json = session.get("https://dikidi.app/mobile/ajax/newrecord/company_services",
                        params=params).json()
     services_raw = json['data']['list']
@@ -36,7 +36,7 @@ async def get_service(**kwargs):
 
 
 async def get_service_details(**kwargs):
-    params = {"lang": "RU", "company": 17280}
+    params = {"lang": "RU", "company": dikidi_org}
     json = session.get("https://dikidi.app/mobile/ajax/newrecord/company_services",
                        params=params).json()
     services_raw = json['data']['list']
@@ -49,7 +49,7 @@ async def get_service_details(**kwargs):
 
 async def get_date_range(**kwargs):
     service_id = kwargs['aiogd_context'].widget_data['r_service']
-    params = {"lang": "RU", "company_id": 17280,
+    params = {"lang": "RU", "company_id": dikidi_org,
               "service_id[]": service_id}
     if not 'start_date' in kwargs['aiogd_context'].widget_data.keys():
         json = session.get("https://dikidi.app/ru/mobile/ajax/newrecord/get_datetimes",
@@ -71,7 +71,7 @@ async def get_date_range(**kwargs):
 async def get_master(**kwargs):
     service_id = kwargs['aiogd_context'].widget_data['r_service']
     date_id = kwargs['aiogd_context'].widget_data['r_date']
-    params = {"lang": "RU", "company_id": 17280,
+    params = {"lang": "RU", "company_id": dikidi_org,
               "date": date_id, "service_id[]": service_id}
     master_list = [Master(item) for item in
                    session.get("https://dikidi.app/ru/mobile/ajax/newrecord/get_datetimes/",

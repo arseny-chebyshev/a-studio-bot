@@ -7,7 +7,7 @@ from models.serializers import Service, Master, Date
 from states.user import UserDialog, RegisterUser
 from filters.base import is_button_selected
 from keyboards.menu.kbds import request_phone_button_kbd
-
+from settings import dikidi_org
 
 async def cancel(c: CallbackQuery, b: Button, d: DialogManager):
     await c.message.delete()
@@ -43,10 +43,10 @@ async def apply_order(c: CallbackQuery, b: Button, d: DialogManager):
     master_id = widget_data['r_master']
     date_obj = Date.fromisoformat(date_id)
     service_json = session.get("https://dikidi.app/mobile/ajax/newrecord/company_services/",
-                               params={"lang": "RU", "company": 17280,
+                               params={"lang": "RU", "company": dikidi_org,
                                        "master": master_id}).json()['data']['list']
     master_json = session.get("https://dikidi.app/ru/mobile/ajax/newrecord/get_datetimes",
-                              params={"lang": "RU", "company_id": 17280, "service_id[]": service_id,
+                              params={"lang": "RU", "company_id": dikidi_org, "service_id[]": service_id,
                                       "date": date_id, "master_id": master_id}).json()['data']
     services = {service_group['id']: [Service(service) for service in service_group['services']]
                 for service_group in service_json.values()}
@@ -73,7 +73,7 @@ async def get_datetime(**kwargs):
     service_id = kwargs['aiogd_context'].widget_data['r_service']
     date_id = kwargs['aiogd_context'].widget_data['r_date']
     master_id = kwargs['aiogd_context'].widget_data['r_master']
-    params = {"lang": "RU", "company_id": 17280,
+    params = {"lang": "RU", "company_id": dikidi_org,
               "date": date_id, "service_id[]": service_id}
     json = session.get("https://dikidi.app/ru/mobile/ajax/newrecord/get_datetimes/",
                        params=params).json()['data']['times'][master_id]
